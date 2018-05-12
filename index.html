@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Slides vs tabs</title>
+  <meta name="description" content="" />
+
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="robots" content="noindex">
+
+  <link rel="stylesheet" type="text/css" href="css/magellan.css?ver=1" />
+
+
+  <script src="js/fa-5.0.6.js"></script>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/split-1.3.5.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.smartSlides.js"></script>
+
+  <script defer src="js/fa-all.js"></script><!-- font awesome -->
+
+<style>
+
+.stMain {}
+.stContainer {
+  position: relative;
+  overflow: hidden;
+}
+.stMain .tabContent { 
+  position: absolute;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="d-flex flex-column h-100">
+
+
+    <header class="mg-header">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand text-light " href="#">Navbar</a>
+        <button class="navbar-toggler text-light  " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-light " href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light " href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light " href="#">
+                <i class="fas fa-user fa-sm"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-light " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown link
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+              <a class="nav-link text-light " href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light " href="#">
+                <i class="fas fa-user fa-sm"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- eof header navbar -->
+
+
+
+
+
+
+    <div class="mg-main d-flex flex-row flex-1">
+      <div class="btn-group-vertical bg-dark d-flex flex-column mg-main-sidebar">
+        <a class="btn btn-outline-light border-0 active " data-tooltip data-placement="right" title="Tooltip on right" data-toggle="pill"
+          href="#content-home" role="tab" aria-controls="content-home" aria-selected="true">
+          <i class="fas fa-user fa-xs"></i>
+        </a>
+        <a class="btn btn-outline-light border-0" data-tooltip data-placement="right" title="Tooltip on right" data-toggle="pill"
+          href="#content-home" role="tab" aria-controls="content-home" aria-selected="false">
+          <i class="fas fa-meh fa-xs"></i>
+        </a>
+        <a class="btn btn-outline-light border-0 " data-tooltip data-placement="right" title="Tooltip on right" data-toggle="pill"
+          href="#content-home" role="tab" aria-controls="content-home" aria-selected="false">
+          <i class="fas fa-user fa-xs"></i>
+        </a>
+      </div>
+
+      <div class="main-content tab-content d-flex flex-1 flex-column">
+        <div class="d-flex flex-1 flex-column ">
+          <div class="p-2 rm-toolbar-top">ddddd</div>
+          <!-- main content -->
+
+
+          <div class="rm-main flex-1 w-100">
+
+     
+              <div id="xxx">
+                <!-- <a data-smartslide-link  href="#profile" data-smartslide-direction="slideLeft" >2nd</a> -->
+                            <a  href="#profile" onclick="showST2('#profile', 'backward'); return false;" >sss</a>
+       
+
+                 <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" data-smartslide-link href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" data-smartslide-link href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" data-smartslide-link href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                    </li>
+                  </ul>
+                  <div class="stContainer tab-content" id="whatever"><!--  dont have to have this container but if you do, have the .stContainer here -->
+                    <div class="tab-pane " data-smartslide id="home" role="tabpanel" aria-labelledby="home-tab">.xzxczxc..</div>
+                    <div class="tab-pane " data-smartslide id="profile" role="tabpanel" aria-labelledby="profile-tab">..e<p>fwrwe</p><a data-smartslide-link href="#home"  return false;" >home</a><p>fwrwe</p><p>fwrwe</p>.</div>
+                    <div class="tab-pane" data-smartslide id="contact" role="tabpanel" aria-labelledby="contact-tab">.jfgjf<p>fwrwe<a  href="#profile"  onclick="showST2('#home', 'forward'); return false;" >home</a></p>hgj..</div>
+                  </div>
+
+                  </div>
+
+
+
+
+          </div>
+          <!-- eof rm-main -->
+
+
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <!-- eof mgmain -->
+    <div class="p-2">main footer content</div>
+
+
+
+  </div>
+
+  <script>
+
+
+    jQuery(document).ready(function () {
+
+      $('#xxx').smartSlides({autoProgress: false,stopOnFocus:true,transitionEffect:'hSlide',saveState:false, autoProgress:false, autoHeight:true, });
+
+    });
+
+     function showST2(tab_index, direction ){
+      $('#xxx').smartSlides('showTab',tab_index, direction);
+      }    
+
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>
