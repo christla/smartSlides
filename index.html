@@ -121,29 +121,173 @@
           <div class="rm-main flex-1 w-100">
 
      
-              <div id="xxx">
-                <!-- <a data-smartslide-link  href="#profile" data-smartslide-direction="slideLeft" >2nd</a> -->
-                            <a  href="#profile" onclick="showST2('#profile', 'backward'); return false;" >sss</a>
-       
+              <div class="col-sm-12 d-flex flex-column" id="tabs">
 
-                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="home-tab" data-toggle="tab" data-smartslide-link href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-toggle="tab" data-smartslide-link href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-toggle="tab" data-smartslide-link href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                    </li>
-                  </ul>
-                  <div class="stContainer tab-content" id="whatever"><!--  dont have to have this container but if you do, have the .stContainer here -->
-                    <div class="tab-pane " data-smartslide id="home" role="tabpanel" aria-labelledby="home-tab">.xzxczxc..</div>
-                    <div class="tab-pane " data-smartslide id="profile" role="tabpanel" aria-labelledby="profile-tab">..e<p>fwrwe</p><a data-smartslide-link href="#home"  return false;" >home</a><p>fwrwe</p><p>fwrwe</p>.</div>
-                    <div class="tab-pane" data-smartslide id="contact" role="tabpanel" aria-labelledby="contact-tab">.jfgjf<p>fwrwe<a  href="#profile"  onclick="showST2('#home', 'forward'); return false;" >home</a></p>hgj..</div>
+            <div class="d-flex flex-row mb-5 align-items-center">
+
+
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active h2 m-0 px-4" data-toggle="tab" data-smartslide-link href="#servicesummary" role="tab" aria-controls="servicesummary" aria-selected="true">Service summary</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link h2 m-0 px-4" data-toggle="tab" data-smartslide-link href="#workflow" role="tab" aria-controls="workflow" aria-selected="false">Workflow</a>
+                </li>
+              </ul>
+
+
+            </div>
+
+            <div class="stContainer flex-1 tab-content">
+
+            <div data-smartslide id="servicesummary" class="show w-100">
+
+              <div class="mt-5">
+
+
+                <div class="row justify-content-md-center">
+
+                  <div class="col-xxl-6 col-xl-6 col-sm-6 mb-2">
+
+                    <!-- card -->
+                    <div class="card h-100 border-left-3 border-blue">
+                      <div class=" text-right ">
+                        <button class="btn  btn btn-outline-secondary border-0" type="button">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                      </div>
+
+                      <div class="card-body py-0 pl-5">
+
+                        <div class="d-flex flex-row">
+                          <div class="flex-1">
+                            <h6 class="mt-0 font-weight-bold">SERVICE FORMS</h6>
+                          </div>
+                        </div>
+
+
+                        <div class="d-flex row flex-row justify-content-center">
+                          <a href="" class="d-flex flex-column align-items-center p-2">
+                            <div class="d-flex flex-row pb-2">
+                              <i class="mgl fa-textkey fa-3x text-red" title="Online form"></i>
+                              <!--<div class="display-4 font-weight-bold">5</div>-->
+                            </div>
+                            <small class="text-stronger">Online form</small>
+                          </a>
+
+                          <a href="" class="d-flex flex-column align-items-center p-2">
+                            <div class="d-flex flex-row pb-2">
+                              <i class="mgl fa-textkey fa-3x text-red" title="Web service form"></i>
+                              <!--<div class="display-4 font-weight-bold">5</div>-->
+                            </div>
+                            <small class="text-stronger">Web service form</small>
+                          </a>
+                        </div>
+
+
+
+
+                      </div>
+                      <div class="card-footer border-0 bg-transparent py-4 pl-5">
+                      </div>
+
+
+                    </div><!-- eof card -->
+
                   </div>
 
+                  <div class="col-xxl-2 col-sm-2 mb-2">
+
+                    <!-- card -->
+                    <div class="card h-100 p-4">
+                          cxvcvcxvcxv
+                    </div><!-- eof card -->
+
                   </div>
+
+                  <div class="col-xxl-2 col-sm-2 mb-2">
+                    <!-- card -->
+                    <div class="card h-100">ddddd</div>
+                  </div>
+
+                  <div class="col-xxl-2 col-sm-2 mb-2">
+                    <!-- card -->
+                    <div class="card h-100 card-alt">ddddd</div>
+                  </div>
+
+                  <div class="col-xxl-6 col-sm-6">
+                    <!-- card -->
+                    <div class="card h-100">ddddd</div>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+            </div>
+            <div data-smartslide id="workflow" class=" w-100" style="display:none">
+              xxxxxxx
+            </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <script type="text/javascript">
+              $(document).ready(function(){
+
+
+
+                $('#tabs').smartSlides(
+                    {
+                      selected: 0,  // Selected Tab, 0 = first tab
+                      saveState:false, // Remembers tab selection
+                      contentURL:null, // content url, Enables Ajax content loading. ex: 'service.php'
+                      contentCache:true, // Cache Ajax content
+                      keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+                      autoProgress:false, // Auto navigate tabs on interval
+                      progressInterval: 3500, // Auto navigate Interval (used only if "autoProgress" is set to true)
+                      stopOnFocus:false, // Stop auto navigation on focus and resume on outfocus
+                      transitionEffect:'hslide', // Effect on navigation, none/hslide/vslide/slide/fade
+                      transitionSpeed:'100', // Transition animation speed
+                      transitionEasing:'easeInOutExpo', // Transition animation easing
+                      autoHeight:false, // Automatically adjust content height
+                      onLeaveTab: null, // triggers when leaving a tab
+                      onShowTab: null  // triggers when showing a tab
+                    }
+
+                );
+
+
+
+               
+
+              });
+
+
+              function showST(id, direction){
+                jQuery(selector).smartSlides('showTab',id, direction);
+              }
+
+
+            </script>
+
+
+
+          </div>
 
 
 
@@ -167,20 +311,7 @@
 
   </div>
 
-  <script>
 
-
-    jQuery(document).ready(function () {
-
-      $('#xxx').smartSlides({autoProgress: false,stopOnFocus:true,transitionEffect:'hSlide',saveState:false, autoProgress:false, autoHeight:true, });
-
-    });
-
-     function showST2(tab_index, direction ){
-      $('#xxx').smartSlides('showTab',tab_index, direction);
-      }    
-
-  </script>
 
 
 

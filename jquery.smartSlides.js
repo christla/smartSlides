@@ -47,11 +47,19 @@
           var stt = getTabState();
           if(stt) st = stt;
         }
-        if(!st || st > slides.length)
+        if(!st || st > slides.length){
           st = 0;
-        //showTab( st );   
-        var id  = slides.eq(st).attr("id");
-        showTab2("#"+id);                                 
+        }
+          var id  = slides.eq(st).attr("id");
+
+          // do not animate the selected tab on page load - just render it
+          jQuery("#"+id).addClass("show");
+          //jQuery("#"+id).css({left:0, width:jQuery("#"+id).css("width")});
+          obj.data('curTabIdx',st);
+
+          //showTab2("#"+id);
+
+
       }
                 
       function setTabs(){
@@ -60,9 +68,9 @@
           $(obj).append(tabContainer);
         }
         //$(tabs).each(function(){
-          $("[data-smartslide]").each(function(){
+          $("[data-smartslide]",obj).each(function(){
           var elm = $(this);
-          elm.addClass('tabContent').hide();
+          elm.addClass('tabContent').removeClass("show");
           tabContainer.append(elm);
         });
       }
@@ -161,22 +169,23 @@
         }
 
         if(options.transitionEffect == 'hslide'){ // horizontal slide
+          var additional = 10; //additional shift
             var cFLeft,cLLeft,sFLeft,sLLeft,cWidth = tabContainer.width();   
             // if target index is larger or direction is set to left                 
             if( (idx>obj.data('curTabIdx') && (direction == null || direction === "forward" ) ) || direction === "forward"   ) { // forward
               cFLeft = 0;
-              cLLeft = (cWidth+10) * -1;
-              sFLeft = (cWidth+10);
+              cLLeft = (cWidth+additional) * -1;
+              sFLeft = (cWidth+additional);
               sLLeft = 0;
             }else { //backward
               cFLeft = 0;
-              cLLeft = (cWidth+10);
-              sFLeft = (cWidth * -2) + 10;
+              cLLeft = (cWidth+additional);
+              sFLeft = (cWidth * -2) + additional;
               sLLeft = 0;
             }                  
             if(curTab.length>0){
               curTab.css("left",cFLeft).animate({left:cLLeft},options.transitionSpeed,options.transitionEasing,function(e){
-                  $(this).hide();
+                  $(this).removeClass("show");
               });                     
             }                     
             selTab.css("left",sFLeft).width(cWidth).show().animate({left:sLLeft},options.transitionSpeed,options.transitionEasing,function(e){
@@ -189,18 +198,18 @@
             var selElm = selTab;
             if(idx>obj.data('curTabIdx')){ // forward
               cFTop = 0;
-              cLTop = (curElm.height()+10) * -1;
-              sFTop = (selElm.height()+10);
+              cLTop = (curElm.height()+additional) * -1;
+              sFTop = (selElm.height()+additional);
               sLTop = 0;
             }else{ //backward
               cFTop = 0;
-              cLTop = (curElm.height()+10);
-              sFTop = (selElm.height() * -2) + 10;
+              cLTop = (curElm.height()+additional);
+              sFTop = (selElm.height() * -2) + additional;
               sLTop = 0;
             }
             if(curTab.length>0){
               curElm.css("top",cFTop).animate({top:cLTop},options.transitionSpeed,options.transitionEasing,function(e){
-                curElm.hide();
+                curElm.removeClass("show");
               });
             }
             selElm.css("top",sFTop).show().animate({top:sLTop},options.transitionSpeed,options.transitionEasing,function(e){
@@ -227,7 +236,7 @@
                 setTabAnchor(idx,curTab,selTab);
             });
         }else{ // none
-            if(curTab.length>0) curTab.hide();
+            if(curTab.length>0) curTab.removeClass("show");
             selTab.show();
             setTabAnchor(idx,curTab,selTab);
         }
@@ -245,8 +254,8 @@
       }
                 
       function setTabAnchor(idx,curTab,selTab){
-        curTab.removeClass("sel");
-        selTab.addClass("sel");
+        curTab.removeClass("active");
+        selTab.addClass("active");
         obj.data('curTabIdx',idx);
         obj.data('isAnimating',false);
         if(options.saveState) saveTabState(idx);
