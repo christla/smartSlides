@@ -52,12 +52,20 @@
         }
           var id  = slides.eq(st).attr("id");
 
+
+
+
           // do not animate the selected tab on page load - just render it
           jQuery("#"+id).addClass("show");
           //jQuery("#"+id).css({left:0, width:jQuery("#"+id).css("width")});
           obj.data('curTabIdx',st);
 
+          if (options.autoHeight ) {
+            tabContainer.css({height: jQuery("#"+id).height()});
+          }
           //showTab2("#"+id);
+
+
 
 
       }
@@ -73,6 +81,10 @@
           elm.addClass('tabContent').removeClass("show");
           tabContainer.append(elm);
         });
+      }
+
+      function endOfAnimation(idx){
+        //tabContainer.css({"position": "static" });
       }
                 
       function setEvents(){
@@ -131,7 +143,7 @@
       }
       
       function loadTabContent(idx){
-        var selTab = sliders.eq(idx);         
+        var selTab = slides.eq(idx);
         if(options.contentCache && selTab.data('hasContent')){
           animateTab(idx);
         }else{
@@ -140,9 +152,9 @@
           $(obj).append(loader);
           $.ajax({
               url: options.contentURL,
-              type: "POST",
+              type: options.ajaxMethod ? options.ajaxMethod : "POST",
               data: ({tab_index : idx}),
-              dataType: "text",
+              dataType: "html",
               beforeSend: function(){loader.show();},
               error: function(){loader.hide().remove();},
               success: function(res){
@@ -186,11 +198,13 @@
             if(curTab.length>0){
               curTab.css("left",cFLeft).animate({left:cLLeft},options.transitionSpeed,options.transitionEasing,function(e){
                   $(this).removeClass("show");
+                endOfAnimation(idx);
               });                     
             }                     
             selTab.css("left",sFLeft).width(cWidth).show().animate({left:sLLeft},options.transitionSpeed,options.transitionEasing,function(e){
               $(this).show();
               setTabAnchor(idx,curTab,selTab);
+              endOfAnimation(idx);
             });
         }else if(options.transitionEffect == 'vslide'){ // vertical slide
             var cFTop,cLTop,sFTop,sLTop,cHeight = tabContainer.height();
@@ -210,23 +224,27 @@
             if(curTab.length>0){
               curElm.css("top",cFTop).animate({top:cLTop},options.transitionSpeed,options.transitionEasing,function(e){
                 curElm.removeClass("show");
+                endOfAnimation(idx);
               });
             }
             selElm.css("top",sFTop).show().animate({top:sLTop},options.transitionSpeed,options.transitionEasing,function(e){
               $(this).show();
               setTabAnchor(idx,curTab,selTab);
+              endOfAnimation(idx);
             });
         }else if(options.transitionEffect == 'slide'){ // normal slide
             if(curTab.length>0){
               curTab.slideUp(options.transitionSpeed,options.transitionEasing,function(){
                   selTab.slideDown(options.transitionSpeed,options.transitionEasing,function(){
                     setTabAnchor(idx,curTab,selTab);
+                    endOfAnimation(idx);
                   });
               });
             }else{
                 selTab.slideDown(options.transitionSpeed,options.transitionEasing,function(){
                   $(this).show();
                   setTabAnchor(idx,curTab,selTab);
+                  endOfAnimation(idx);
                 });
             }
         }else if(options.transitionEffect == 'fade'){ // normal fade
@@ -234,6 +252,7 @@
               selTab.fadeIn(options.transitionSpeed,options.transitionEasing);
                 $(this).show();
                 setTabAnchor(idx,curTab,selTab);
+              endOfAnimation(idx);
             });
         }else{ // none
             if(curTab.length>0) curTab.removeClass("show");
@@ -391,6 +410,7 @@
       saveState:false, // Remembers tab selection 
       contentURL:null, // content url, Enables Ajax content loading. ex: 'service.php'   
       contentCache:true, // Cache Ajax content
+      ajaxMethod: null,
       keyNavigation:true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
       autoProgress:false, // Auto navigate tabs on interval
       progressInterval: 3500, // Auto navigate Interval (used only if "autoProgress" is set to true)
